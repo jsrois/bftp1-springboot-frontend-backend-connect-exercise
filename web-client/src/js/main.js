@@ -1,12 +1,17 @@
 // Al incluír aquí el SCSS hacemos que webpack genere
 // un archivo bundle.js que contiene tanto el javascript
 // como el CSS
+
 import '../scss/main.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {BrowserRouter} from "react-router-dom";
+import {App} from "./components/App";
 
 
 ReactDOM.render(
-    <div className="greeting">⚛️ Hello from React! ⚛️</div>,
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
     document.getElementById("app")
 )
