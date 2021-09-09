@@ -3,12 +3,11 @@ package org.example.exampleapp.controllers;
 import org.example.exampleapp.entities.Cookie;
 import org.example.exampleapp.repositories.CookieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CookieController {
@@ -28,5 +27,11 @@ public class CookieController {
     @PostMapping("/cookies")
     public Cookie saveCookie(@RequestBody Cookie cookie) {
         return cookieRepository.save(cookie);
+    }
+
+    @DeleteMapping("/cookies/{id}")
+    public ResponseEntity<String> deleteCookie(@PathVariable Long id) {
+        cookieRepository.deleteById(id);
+        return ResponseEntity.of(Optional.of("eliminada cookie"));
     }
 }
