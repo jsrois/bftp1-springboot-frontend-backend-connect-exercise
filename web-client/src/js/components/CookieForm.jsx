@@ -1,8 +1,14 @@
 import * as React from "react"
 import {useState} from "react";
 import {Form} from "react-bootstrap";
+import {CookieApi} from "../services/CookieApi";
+import {Redirect} from "react-router-dom";
 
-export const CookieForm = () => {
+export const CookieForm = (props) => {
+
+    // me dice si ya hemos enviado el formulario
+    const [enviado, setEnviado] = useState(false)
+
     const [cookie, setCookie] = useState({
         name: '',
         type: '',
@@ -19,11 +25,17 @@ export const CookieForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        console.log("submitted")
+        const cookieApi = new CookieApi()
+        cookieApi
+            .createCookie(cookie)
+            .then(() => setEnviado(true))
+            .then(props.onSuccess)
 
     }
 
+    if (enviado) {
+        return <Redirect to="/"/>
+    }
 
     return (<div>
         <Form onSubmit={handleSubmit}>

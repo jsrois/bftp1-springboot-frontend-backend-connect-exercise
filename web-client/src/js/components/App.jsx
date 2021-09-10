@@ -1,27 +1,34 @@
 import * as React from "react"
 import {TopNavigationBar} from "./TopNavigationBar";
 import {Route, Switch} from "react-router-dom";
-import {CookiesList} from "./CookiesList";
+import {CookiesTable} from "./CookiesTable";
 import {CookieForm} from "./CookieForm";
+import {CookieApi} from "../services/CookieApi";
+import {useEffect, useState} from "react";
 
 
 export const App = () => {
 
+    const [cookies, setCookies] = useState([])
+
+    const load = () => {
+        new CookieApi().getCookies().then(setCookies)
+    }
+
+    useEffect(load, [])
 
     return <>
         <TopNavigationBar/>
-
         <Switch>
             <Route exact path="/">
-                <CookiesList cookies={[]} />
+                <CookiesTable
+                    cookies={cookies}
+                    onDeleteSuccess={load}/>
             </Route>
             <Route path="/add">
-                <CookieForm />
+                <CookieForm
+                    onSuccess={load} />
             </Route>
-            <Route exact path="/edit/:id">
-                <CookieForm />
-            </Route>
-
         </Switch>
 
     </>

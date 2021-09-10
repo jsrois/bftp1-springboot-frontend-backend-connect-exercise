@@ -1,13 +1,11 @@
 export class CookieApi {
 
-    baseUrl = "http://localhost:8080"
-
     getCookies() {
-        return fetch(`${(this.baseUrl)}/cookies`).then(r => r.json())
+        return fetch(`http://localhost:8080/cookies`).then(r => r.json())
     }
 
     createCookie(cookie) {
-        return fetch(`${(this.baseUrl)}/cookies`, {
+        return fetch(`http://localhost:8080/cookies`, {
             method: 'POST',
             'headers': {
                 'Content-Type': 'application/json'
@@ -17,7 +15,7 @@ export class CookieApi {
     }
 
     deleteCookieById(id) {
-        return fetch(`${(this.baseUrl)}/cookies/${id}`, {
+        return fetch(`http://localhost:8080/cookies/${id}`, {
             method: 'DELETE'
         })
     }
