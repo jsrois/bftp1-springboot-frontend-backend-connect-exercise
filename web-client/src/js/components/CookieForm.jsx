@@ -20,6 +20,8 @@ export const CookieForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        console.log("submitted")
+
     }
 
 
@@ -57,9 +59,10 @@ export const CookieForm = () => {
             </Form.Group>
 
 
-            <input type="submit"
-                   value="Dar de Alta"
-            />
+            <button type="submit"
+                   onClick={handleSubmit}>
+                Create
+            </button>
 
         </Form>
 
