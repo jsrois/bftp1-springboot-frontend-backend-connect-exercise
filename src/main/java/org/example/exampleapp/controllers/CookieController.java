@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
 public class CookieController {
 
     private CookieRepository cookieRepository;
