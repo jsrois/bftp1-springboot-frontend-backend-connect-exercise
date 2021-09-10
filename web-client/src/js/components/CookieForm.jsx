@@ -1,15 +1,16 @@
 import * as React from "react"
-import {useState} from "react";
+import {useDebugValue, useState} from "react";
 import {Form} from "react-bootstrap";
 import {CookieApi} from "../services/CookieApi";
-import {Redirect} from "react-router-dom";
+import {Redirect, useLocation, useParams} from "react-router-dom";
 
 export const CookieForm = (props) => {
 
-    // me dice si ya hemos enviado el formulario
+    const locationData = useLocation()
+
     const [enviado, setEnviado] = useState(false)
 
-    const [cookie, setCookie] = useState({
+    const [cookie, setCookie] = useState(locationData.state?.cookie || {
         name: '',
         type: '',
         calories: ''
@@ -46,6 +47,7 @@ export const CookieForm = (props) => {
                        type="text"
                        name="name"
                        placeholder="Name"
+                       value={cookie.name}
                        onChange={handleInputChange}
                 />
             </Form.Group>
@@ -56,6 +58,7 @@ export const CookieForm = (props) => {
                        type="text"
                        name="type"
                        placeholder="type"
+                       value={cookie.type}
                        onChange={handleInputChange}
                 />
             </Form.Group>
@@ -65,6 +68,7 @@ export const CookieForm = (props) => {
                 <input id="calories"
                        type="number"
                        name="calories"
+                       value={cookie.calories}
                        placeholder="0"
                        onChange={handleInputChange}
                 />
@@ -73,7 +77,7 @@ export const CookieForm = (props) => {
 
             <button type="submit"
                    onClick={handleSubmit}>
-                Create
+                {locationData.state ? "Update": "Create"}
             </button>
 
         </Form>

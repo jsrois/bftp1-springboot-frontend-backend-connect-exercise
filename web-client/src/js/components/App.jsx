@@ -26,8 +26,10 @@ export const App = () => {
                     onDeleteSuccess={load}/>
             </Route>
             <Route path="/add">
-                <CookieForm
-                    onSuccess={load} />
+                <CookieForm onSuccess={load} />
+            </Route>
+            <Route path="/edit/:id">
+                <CookieForm onSuccess={load}/>
             </Route>
         </Switch>
 
